@@ -121,7 +121,7 @@ class Usuario{
 
         // query to read single record
         $query = "SELECT
-                    iduser, user_Name, user_Password, email, user_type               
+                     user_Name, user_Password, user_type               
                     FROM
                     " . $this->table_name ." 
                 WHERE
@@ -144,7 +144,40 @@ class Usuario{
         // set values to object properties
         $this->user_Name = $row['user_Name'];
         $this->user_Password = $row['user_Password'];
-        $this->email = $row['email'];
+        $this->user_type = $row['user_type'];
+    
+        
+    }
+
+    function readId()
+    {
+
+        // query to read single record
+        $query = "SELECT
+                    iduser, user_Password, user_type, reference               
+                    FROM
+                    " . $this->table_name ." 
+                WHERE
+                    user_Name = ?
+                LIMIT
+                    0,1";
+    
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+    
+        // bind id of product to be updated
+        $stmt->bindParam(1, $this->user_Name);
+    
+        // execute query
+        $stmt->execute();
+    
+        // get retrieved row
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        // set values to object properties
+        $this->iduser = $row['iduser'];
+        $this->user_Password = $row['user_Password'];
+        $this->reference = $row['reference'];
         $this->user_type = $row['user_type'];
     
         

@@ -14,6 +14,7 @@ class Consultas
     public $num_Consultorio;
     public $nom_Doctor;
     public $idpaciente;
+    public $idempleado;
 
 
 // constructor with $db as database connection
@@ -186,5 +187,23 @@ $this->nom_Doctor = $row['nom_Doctor'];
     $stmt->execute();
     return $stmt;
     }
+
+    function readById()
+    {
+        $query = "SELECT
+                    idconsulta, fecha, hora, nombres, apellidos, num_Consultorio, nom_Doctor
+                FROM
+                    " . $this->table_name ." 
+                WHERE
+                idempleado = ?";
+   // prepare query statement
+    $stmt = $this->conn->prepare($query);
+
+    $stmt->bindParam(1, $this->idempleado);
+   // execute query
+    $stmt->execute();
+    return $stmt;
+    }
+
 
 }
