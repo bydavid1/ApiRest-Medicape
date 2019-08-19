@@ -24,14 +24,8 @@ include_once '../objects/paciente.php';
     // products array
     $paciente_arr=array();
     $paciente_arr =array();
-    // retrieve our table contents
-    // fetch() is faster than fetchAll()
-    // http://stackoverflow.com/questions/2770630/pdofetchall-vs-pdofetch-in-a-loop
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
     {
-        // extract row
-        // this will make $row['name'] to
-        // just $name only
         extract($row);
 
         $paciente_item=array(
@@ -46,8 +40,7 @@ include_once '../objects/paciente.php';
             "departamento" => $departamento,
             "municipio" => $municipio,
             "direccion" => $direccion,
-            "telefono" => $telefono,
-            "num_Expediente" => $num_Expediente
+            "telefono" => $telefono
         );
 
         array_push($paciente_arr, $paciente_item);
@@ -66,6 +59,6 @@ else{
 
     // tell the user no products found
     echo json_encode(
-        array("message" => "No employee found.")
+        array("message" => "No patient found.")
     );
 }

@@ -18,7 +18,6 @@ class Paciente{
     public $municipio;
     public $direccion;
     public $telefono;
-    public $num_Expediente;
 
 
 // constructor with $db as database connection
@@ -32,7 +31,7 @@ class Paciente{
     {
     // select all query
     $query = "SELECT
-                idpaciente, nombres, apellidos, fecha_Nac, sexo, estado_Civil, dui, email, departamento, municipio, direccion, telefono, num_Expediente
+                idpaciente, nombres, apellidos, fecha_Nac, sexo, estado_Civil, dui, email, departamento, municipio, direccion, telefono
             FROM
                 " . $this->table_name;
     // prepare query statement
@@ -47,7 +46,7 @@ class Paciente{
     function create()
     {
     // query to insert record
-    $query = "INSERT INTO " . $this->table_name . " SET  nombres=:nombres, apellidos=:apellidos, fecha_Nac=:fecha_Nac, sexo=:sexo, estado_Civil=:estado_Civil, dui=:dui, email=:email,  departamento=:departamento, municipio=:municipio, direccion=:direccion, telefono=:telefono, num_Expediente=:num_Expediente";
+    $query = "INSERT INTO " . $this->table_name . " SET  nombres=:nombres, apellidos=:apellidos, fecha_Nac=:fecha_Nac, sexo=:sexo, estado_Civil=:estado_Civil, dui=:dui, email=:email,  departamento=:departamento, municipio=:municipio, direccion=:direccion, telefono=:telefono, =:";
 
     echo $query;
     // prepare query
@@ -65,7 +64,6 @@ class Paciente{
     $stmt->bindParam(":municipio", $this->municipio);
     $stmt->bindParam(":direccion", $this->direccion);
     $stmt->bindParam(":telefono", $this->telefono);
-    $stmt->bindParam(":num_Expediente", $this->num_Expediente);
 
     // execute query
     if($stmt->execute())
@@ -191,11 +189,11 @@ class Paciente{
 
     // select all query
     $query = "SELECT
-            idpaciente, nombres, apellidos, num_Expediente
+            idpaciente, nombres, apellidos, 
             FROM
                 " . $this->table_name . " 
             WHERE
-            nombres LIKE ? OR apellidos LIKE ? OR num_Expediente LIKE ? ";
+            nombres LIKE ? OR apellidos LIKE ? OR  LIKE ? ";
 
     // prepare query statement
     $stmt = $this->conn->prepare($query);
