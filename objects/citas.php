@@ -13,8 +13,8 @@ class Cita
     public $apellido_Paciente;
     public $num_Consultorio;
     public $nombre_Doctor;
-    public $num_Expediente;
     public $idpaciente;
+    public $idempleado;
 
 // constructor with $db as database connection
     public function __construct($db)
@@ -153,6 +153,29 @@ class Cita
     
         // bind id of product to be updated
         $stmt->bindParam(1, $this->idpaciente);
+    
+        // execute query
+        $stmt->execute();
+    
+        return $stmt;
+    }
+
+    function customRead()
+    {
+
+        // query to read single record
+        $query = "SELECT
+                    idcita, fecha_Cita, hora_Cita, nombre_Paciente, apellido_Paciente, num_Consultorio, nombre_Doctor
+                FROM
+                    " . $this->table_name ." 
+                WHERE
+                    idempleado = ?";
+    
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+    
+        // bind id of product to be updated
+        $stmt->bindParam(1, $this->idempleado);
     
         // execute query
         $stmt->execute();
