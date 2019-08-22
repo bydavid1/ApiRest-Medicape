@@ -42,10 +42,6 @@ if($empleado->fecha_Nac!=null)
         "departamento" => $empleado->departamento,
         "municipio" => $empleado->municipio,
         "direccion" => $empleado->direccion,
-        "antecedentes" => $empleado->antecedentes,
-        "solvencia" => $empleado->solvencia,
-        "constancia_Titulo" => $empleado->constancia_Titulo,
-        "certificado_Salud" => $empleado->certificado_Salud,
         "fecha_Contratacion" => $empleado->fecha_Contratacion
     );
 

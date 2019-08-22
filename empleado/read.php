@@ -65,10 +65,6 @@ include_once '../objects/empleado.php';
             "departamento" => $departamento,
             "municipio" => $municipio,
             "direccion" => $direccion,
-            "antecedentes" => $antecedentes,
-            "solvencia" => $solvencia,
-            "constancia_Titulo" => $constancia_Titulo,
-            "certificado_Salud" => $certificado_Salud,
             "fecha_Contratacion" => $fecha_Contratacion
         );
 

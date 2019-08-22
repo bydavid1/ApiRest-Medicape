@@ -37,10 +37,6 @@ if  (
     !empty($data->municipio) &&
     !empty($data->direccion) &&
     !empty($data->especialidad) &&
-    !empty($data->antecedentes) &&
-    !empty($data->solvencia) &&
-    !empty($data->constancia_Titulo) &&
-    !empty($data->certificado_Salud) &&
     !empty($data->fecha_Contratacion) 
     )
 {
@@ -59,10 +55,6 @@ if  (
     $empleado->departamento = $data->departamento;
     $empleado->municipio = $data->municipio;
     $empleado->direccion = $data->direccion;
-    $empleado->antecedentes = $data->antecedentes;
-    $empleado->solvencia = $data->solvencia;
-    $empleado->constancia_Titulo = $data->constancia_Titulo;
-    $empleado->certificado_Salud = $data->certificado_Salud;
     $empleado->fecha_Contratacion = $data->fecha_Contratacion;
     
     // create the product

@@ -38,10 +38,6 @@ $empleado->email = $data->email;
 $empleado->departamento = $data->departamento;
 $empleado->municipio = $data->municipio;
 $empleado->direccion = $data->direccion;
-$empleado->antecedentes = $data->antecedentes;
-$empleado->solvencia = $data->solvencia;
-$empleado->constancia_Titulo = $data->constancia_Titulo;
-$empleado->certificado_Salud = $data->certificado_Salud;
 $empleado->fecha_Contratacion = $data->fecha_Contratacion;
 
 

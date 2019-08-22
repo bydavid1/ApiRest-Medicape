@@ -22,10 +22,6 @@ class Empleado{
     public $municipio;
     public $direccion;
     public $antecedentes;
-    public $solvencia;
-    public $constancia_Titulo;
-    public $certificado_Salud;
-    public $fecha_Contratacion;
 
 
 // constructor with $db as database connection
@@ -39,7 +35,7 @@ class Empleado{
     {
     // select all query
     $query = "SELECT
-                idempleado, nombres, apellidos, fecha_Nac, sexo, estado_Civil, dui, nit, especialidad, telefono, celular, email, departamento, municipio, direccion, antecedentes,  solvencia,  constancia_Titulo,  certificado_Salud, fecha_Contratacion
+                idempleado, nombres, apellidos, fecha_Nac, sexo, estado_Civil, dui, nit, especialidad, telefono, celular, email, departamento, municipio, direccion, fecha_Contratacion
             FROM
                 " . $this->table_name;
     // prepare query statement
@@ -69,10 +65,6 @@ class Empleado{
                 departamento=:departamento, 
                 municipio=:municipio, 
                 direccion=:direccion, 
-                antecedentes=:antecedentes, 
-                solvencia=:solvencia, 
-                constancia_Titulo=:constancia_Titulo, 
-                certificado_Salud=:certificado_Salud, 
                 fecha_Contratacion=:fecha_Contratacion";
 
     echo $query;
@@ -94,10 +86,6 @@ class Empleado{
     $stmt->bindParam(":departamento", $this->departamento);
     $stmt->bindParam(":municipio", $this->municipio);
     $stmt->bindParam(":direccion", $this->direccion);
-    $stmt->bindParam(":antecedentes", $this->antecedentes);
-    $stmt->bindParam(":solvencia", $this->solvencia);
-    $stmt->bindParam(":constancia_Titulo", $this->constancia_Titulo);
-    $stmt->bindParam(":certificado_Salud", $this->certificado_Salud);
     $stmt->bindParam(":fecha_Contratacion", $this->fecha_Contratacion);
     // execute query
     if($stmt->execute())
@@ -130,10 +118,6 @@ class Empleado{
             departamento=:departamento, 
             municipio=:municipio, 
             direccion=:direccion, 
-            antecedentes=:antecedentes, 
-            solvencia=:solvencia, 
-            constancia_Titulo=:constancia_Titulo, 
-            certificado_Salud=:certificado_Salud, 
             fecha_Contratacion=:fecha_Contratacion
             WHERE
                 idempleado=:idempleado";
@@ -156,10 +140,6 @@ class Empleado{
     $stmt->bindParam(":departamento", $this->departamento);
     $stmt->bindParam(":municipio", $this->municipio);
     $stmt->bindParam(":direccion", $this->direccion);
-    $stmt->bindParam(":antecedentes", $this->antecedentes);
-    $stmt->bindParam(":solvencia", $this->solvencia);
-    $stmt->bindParam(":constancia_Titulo", $this->constancia_Titulo);
-    $stmt->bindParam(":certificado_Salud", $this->certificado_Salud);
     $stmt->bindParam(":fecha_Contratacion", $this->fecha_Contratacion);
     $stmt->bindParam(":idempleado", $this->idempleado);  
     // execute the query
@@ -198,7 +178,7 @@ class Empleado{
 
         // query to read single record
         $query = "SELECT
-                idempleado, nombres, apellidos, fecha_Nac, sexo, estado_Civil, dui, nit, especialidad, telefono, celular, email, departamento, municipio, direccion, antecedentes,  solvencia,  constancia_Titulo,  certificado_Salud, fecha_Contratacion
+                idempleado, nombres, apellidos, fecha_Nac, sexo, estado_Civil, dui, nit, especialidad, telefono, celular, email, departamento, municipio, direccion, fecha_Contratacion
                 FROM
                     " . $this->table_name ." 
                 WHERE
@@ -233,10 +213,6 @@ class Empleado{
         $this->departamento = $row['departamento'];
         $this->municipio = $row['municipio'];
         $this->direccion = $row['direccion'];
-        $this->antecedentes = $row['antecedentes'];
-        $this->solvencia = $row['solvencia'];
-        $this->constancia_Titulo = $row['constancia_Titulo'];
-        $this->certificado_Salud = $row['certificado_Salud'];
         $this->fecha_Contratacion = $row['fecha_Contratacion'];
         
     }
