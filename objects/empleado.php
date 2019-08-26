@@ -21,7 +21,7 @@ class Empleado{
     public $departamento;
     public $municipio;
     public $direccion;
-    public $antecedentes;
+    public $fecha_Contratacion;
 
 
 // constructor with $db as database connection
@@ -223,7 +223,7 @@ class Empleado{
 
     // select all query
     $query = "SELECT
-            idempleado, nombres, apellidos, especialidad, email
+            idempleado, nombres, apellidos, especialidad, fecha_Nac
             FROM
                 " . $this->table_name . " 
             WHERE

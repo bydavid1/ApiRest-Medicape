@@ -39,7 +39,7 @@ if($num>0){
             "idempleado" => $idempleado,
             "nombres" => $nombres,
             "apellidos" =>$apellidos,
-            "email" =>$email,
+            "fecha_Nac" =>$fecha_Nac,
             "especialidad" => $especialidad
             
         );
@@ -56,11 +56,12 @@ if($num>0){
 
 else{
     // set response code - 404 Not found
-    http_response_code(404);
+    http_response_code(204);
 
     // tell the user no products found
     echo json_encode(
         array("message" => "No se encontraron Resultados.")
     );
 }
+
 ?>
