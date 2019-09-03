@@ -32,10 +32,11 @@ class Consultas
     $query = "SELECT
                 idconsulta, fecha, hora, nombres, apellidos, num_Consultorio, nom_Doctor
             FROM
-                " . $this->table_name;
+                " . $this->table_name . " WHERE idempleado = ?";
     // prepare query statement
     $stmt = $this->conn->prepare($query);
     // execute query
+    $stmt->bindParam(1, $this->idempleado);
     $stmt->execute();
     return $stmt;
     }
