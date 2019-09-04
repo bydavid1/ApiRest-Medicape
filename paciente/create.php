@@ -32,8 +32,7 @@ if  (
     !empty($data->departamento) &&
     !empty($data->municipio) &&
     !empty($data->direccion) &&
-    !empty($data->telefono) &&
-    !empty($data->num_Expediente))
+    !empty($data->telefono) )
 {
     // set product property values
     $paciente->nombres = $data->nombres;
@@ -47,7 +46,6 @@ if  (
     $paciente->municipio = $data->municipio;
     $paciente->direccion = $data->direccion;
     $paciente->telefono = $data->telefono;
-    $paciente->num_Expediente = $data->num_Expediente;
     
     // create the product
     if($paciente->create())

@@ -46,7 +46,7 @@ class Paciente{
     function create()
     {
     // query to insert record
-    $query = "INSERT INTO " . $this->table_name . " SET  nombres=:nombres, apellidos=:apellidos, fecha_Nac=:fecha_Nac, sexo=:sexo, estado_Civil=:estado_Civil, dui=:dui, email=:email,  departamento=:departamento, municipio=:municipio, direccion=:direccion, telefono=:telefono, =:";
+    $query = "INSERT INTO " . $this->table_name . " SET  nombres=:nombres, apellidos=:apellidos, fecha_Nac=:fecha_Nac, sexo=:sexo, estado_Civil=:estado_Civil, dui=:dui, email=:email,  departamento=:departamento, municipio=:municipio, direccion=:direccion, telefono=:telefono";
 
     echo $query;
     // prepare query
