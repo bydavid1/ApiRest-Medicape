@@ -7,7 +7,6 @@ header("Content-Type: application/json; charset=UTF-8");
 include_once '../config/database.php';
 include_once '../objects/paciente.php';
 
-// instantiate database and product object
 $database = new Database();
 $db = $database->getConnection();
 
@@ -19,32 +18,20 @@ $paciente = new Paciente($db);
 
 $keywords=isset($_GET["query"]) ? $_GET["query"] : "";
 
-// query products
 $stmt = $paciente->search($keywords);
 $num = $stmt->rowCount();
 
-// check if more than 0 record found
 if($num>0){
 
-    // products array
     $paciente_arr=array();
     $paciente_arr=array();
-
-    // retrieve our table contents
-    // fetch() is faster than fetchAll()
-    // http://stackoverflow.com/questions/2770630/pdofetchall-vs-pdofetch-in-a-loop
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-        // extract row
-        // this will make $row['name'] to
-        // just $name only
         extract($row);
 
         $paciente_item=array(
             "idpaciente" => $idpaciente,
             "nombres" => $nombres,
-            "apellidos" =>$apellidos,
-            "num_Expediente" => $num_Expediente
-            
+            "apellidos" =>$apellidos
         );
 
         array_push($paciente_arr, $paciente_item);

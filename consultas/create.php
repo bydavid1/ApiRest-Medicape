@@ -20,29 +20,23 @@ $consulta = new Consultas($db);
 // get posted data
 $data = json_decode(file_get_contents("php://input"));
 
-// make sure data is not empty
 if  (
     !empty($data->fecha) &&
     !empty($data->hora) &&
     !empty($data->nombres) &&
     !empty($data->apellidos) &&
     !empty($data->num_Consultorio) &&
-    !empty($data->idpaciente) &&
-    !empty($data->nom_Doctor)
+    !empty($data->idpaciente)
     )
 {
 
-    // set product property values
     $consulta->fecha = $data->fecha;
     $consulta->hora = $data->hora;
     $consulta->nombres = $data->nombres;
     $consulta->apellidos = $data->apellidos;
     $consulta->num_Consultorio = $data->num_Consultorio;
-    $consulta->nom_Doctor = $data->nom_Doctor;
     $consulta->idpaciente = $data->idpaciente;
 
-
-    // create the product
     if($consulta->create())
     {
         $id = $db->lastInsertId();

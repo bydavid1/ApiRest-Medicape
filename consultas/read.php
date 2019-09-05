@@ -33,8 +33,7 @@ if($num>0){
             "hora" => $hora,
             "nombres" => $nombres,
             "apellidos" => $apellidos,
-            "num_Consultorio" => $num_Consultorio,
-            "nom_Doctor" => $nom_Doctor
+            "num_Consultorio" => $num_Consultorio
         );
 
         array_push($consulta_arr, $consulta_item);

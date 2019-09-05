@@ -12,7 +12,6 @@ class Consultas
     public $nombres;
     public $apellidos;
     public $num_Consultorio;
-    public $nom_Doctor;
     public $idpaciente;
     public $idempleado;
 
@@ -30,7 +29,7 @@ class Consultas
     {
     // select all query
     $query = "SELECT
-                idconsulta, fecha, hora, nombres, apellidos, num_Consultorio, nom_Doctor
+                idconsulta, fecha, hora, nombres, apellidos, num_Consultorio
             FROM
                 " . $this->table_name . " WHERE idempleado = ?";
     // prepare query statement
@@ -52,8 +51,7 @@ class Consultas
             nombres=:nombres,
             apellidos=:apellidos,
             num_Consultorio=:num_Consultorio, 
-            idpaciente=:idpaciente, 
-            nom_Doctor=:nom_Doctor";
+            idpaciente=:idpaciente";
             
     /*echo $query;*/
 
@@ -66,7 +64,6 @@ class Consultas
     $stmt->bindParam(":nombres", $this->nombres);
     $stmt->bindParam(":apellidos", $this->apellidos);
     $stmt->bindParam(":num_Consultorio", $this->num_Consultorio);
-    $stmt->bindParam(":nom_Doctor", $this->nom_Doctor);
     $stmt->bindParam(":idpaciente", $this->idpaciente);
     // execute query
     if($stmt->execute())

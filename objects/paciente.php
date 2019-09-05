@@ -189,11 +189,11 @@ class Paciente{
 
     // select all query
     $query = "SELECT
-            idpaciente, nombres, apellidos, 
+            idpaciente, nombres, apellidos 
             FROM
                 " . $this->table_name . " 
             WHERE
-            nombres LIKE ? OR apellidos LIKE ? OR  LIKE ? ";
+            nombres LIKE ? OR apellidos LIKE ? ";
 
     // prepare query statement
     $stmt = $this->conn->prepare($query);
@@ -205,7 +205,6 @@ class Paciente{
     // bind
     $stmt->bindParam(1, $keywords);
     $stmt->bindParam(2, $keywords);
-    $stmt->bindParam(3, $keywords);
 
     // execute query
     $stmt->execute();
