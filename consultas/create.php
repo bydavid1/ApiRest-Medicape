@@ -26,6 +26,7 @@ if  (
     !empty($data->nombres) &&
     !empty($data->apellidos) &&
     !empty($data->num_Consultorio) &&
+    !empty($data->idempleado) &&
     !empty($data->idpaciente)
     )
 {
@@ -35,6 +36,7 @@ if  (
     $consulta->nombres = $data->nombres;
     $consulta->apellidos = $data->apellidos;
     $consulta->num_Consultorio = $data->num_Consultorio;
+    $consulta->idempleado = $data->idempleado;
     $consulta->idpaciente = $data->idpaciente;
 
     if($consulta->create())

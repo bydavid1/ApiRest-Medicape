@@ -10,7 +10,6 @@ class Item_exp{
     public $tratamiento;
     public $observaciones;
     public $receta;
-    public $num_Expediente;
     public $descripcion_Exam;
     public $idpaciente;
     public $idconsulta;
@@ -25,7 +24,7 @@ class Item_exp{
     {
     // select all query
     $query = "SELECT
-                iditemexp, diagnostico, tratamiento, observaciones, receta, num_Expediente, descripcion_Exam, idpaciente, idconsulta
+                iditemexp, diagnostico, tratamiento, observaciones, receta, descripcion_Exam, idpaciente, idconsulta
             FROM
                 " . $this->table_name;
     // prepare query statement
@@ -46,7 +45,6 @@ class Item_exp{
                 tratamiento=:tratamiento,
                 observaciones=:observaciones, 
                 receta=:receta, 
-                num_Expediente=:num_Expediente, 
                 descripcion_Exam=:descripcion_Exam,
                 idpaciente=:idpaciente,
                 idconsulta=:idconsulta";
@@ -60,7 +58,6 @@ class Item_exp{
     $stmt->bindParam(":tratamiento", $this->tratamiento);
     $stmt->bindParam(":observaciones", $this->observaciones);
     $stmt->bindParam(":receta", $this->receta);
-    $stmt->bindParam(":num_Expediente", $this->num_Expediente);
     $stmt->bindParam(":descripcion_Exam", $this->descripcion_Exam);
     $stmt->bindParam(":idpaciente", $this->idpaciente);
     $stmt->bindParam(":idconsulta", $this->idconsulta);

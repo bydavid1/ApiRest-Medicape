@@ -24,7 +24,6 @@ class Consultas
 
 
 
-// read products
     function read()
     {
     // select all query
@@ -40,10 +39,8 @@ class Consultas
     return $stmt;
     }
 
-// create product
     function create()
     {
-    // query to insert record
     $query = "INSERT INTO " . $this->table_name . "
             SET 
             fecha=:fecha,
@@ -51,11 +48,9 @@ class Consultas
             nombres=:nombres,
             apellidos=:apellidos,
             num_Consultorio=:num_Consultorio, 
-            idpaciente=:idpaciente";
+            idpaciente=:idpaciente,
+            idempleado=:idempleado";
             
-    /*echo $query;*/
-
-    // prepare query
     $stmt = $this->conn->prepare($query);
 
     // bind values
@@ -65,6 +60,7 @@ class Consultas
     $stmt->bindParam(":apellidos", $this->apellidos);
     $stmt->bindParam(":num_Consultorio", $this->num_Consultorio);
     $stmt->bindParam(":idpaciente", $this->idpaciente);
+    $stmt->bindParam(":idempleado", $this->idempleado);
     // execute query
     if($stmt->execute())
     {
@@ -86,8 +82,7 @@ class Consultas
             nombres=:nombres,
             apellidos=:apellidos,
             num_Paciente=:num_Paciente, 
-            num_Consultorio=:num_Consultorio, 
-            nom_Doctor=:nom_Doctor
+            num_Consultorio=:num_Consultorio
             WHERE
             idconsulta=:idconsulta";
 
@@ -100,7 +95,6 @@ class Consultas
     $stmt->bindParam(":num_Paciente", $this->num_Paciente);
     $stmt->bindParam(":apellido_Paciente", $this->apellido_Paciente);
     $stmt->bindParam(":num_Consultorio", $this->num_Consultorio);
-    $stmt->bindParam(":nom_Doctor", $this->nom_Doctor);
     $stmt->bindParam(":idconsulta", $this->idconsulta);    
     // execute the query
     if($stmt->execute())
@@ -138,7 +132,7 @@ class Consultas
 
                     // query to read single record
         $query = "SELECT
-        idconsulta, fecha, hora, nombres, apellidos, num_Consultorio, nom_Doctor
+        idconsulta, fecha, hora, nombres, apellidos, num_Consultorio
     FROM
         " . $this->table_name ." 
     WHERE
@@ -172,7 +166,7 @@ $this->nom_Doctor = $row['nom_Doctor'];
     function custom_read()
     {
         $query = "SELECT
-                    idconsulta, fecha, hora, nombres, apellidos, num_Consultorio, nom_Doctor
+                    idconsulta, fecha, hora, nombres, apellidos, num_Consultorio
                 FROM
                     " . $this->table_name ." 
                 WHERE

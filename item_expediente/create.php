@@ -27,7 +27,6 @@ if  (
     !empty($data->tratamiento) &&
     !empty($data->observaciones) &&
     !empty($data->receta) &&
-    !empty($data->num_Expediente) &&
     !empty($data->idpaciente) &&
     !empty($data->idconsulta)
     )
@@ -38,7 +37,6 @@ if  (
     $item_expediente->tratamiento = $data->tratamiento;
     $item_expediente->observaciones = $data->observaciones;
     $item_expediente->receta = $data->receta;
-    $item_expediente->num_Expediente = $data->num_Expediente;
     $item_expediente->descripcion_Exam = $data->descripcion_Exam;
     $item_expediente->idpaciente = $data->idpaciente;
     $item_expediente->idconsulta = $data->idconsulta;

@@ -12,7 +12,6 @@ class Cita
     public $nombre_Paciente;
     public $apellido_Paciente;
     public $num_Consultorio;
-    public $nombre_Doctor;
     public $idpaciente;
     public $idempleado;
 
@@ -29,7 +28,7 @@ class Cita
     {
     // select all query
     $query = "SELECT
-                idcita, fecha_Cita, hora_Cita, nombre_Paciente, apellido_Paciente, num_Consultorio, nombre_Doctor, idpaciente
+                idcita, fecha_Cita, hora_Cita, nombre_Paciente, apellido_Paciente, num_Consultorio, idpaciente
             FROM
                 " . $this->table_name;
     // prepare query statement
@@ -51,7 +50,6 @@ class Cita
                 nombre_Paciente=:nombre_Paciente, 
                 apellido_Paciente=:apellido_Paciente, 
                 num_Consultorio=:num_Consultorio, 
-                nombre_Doctor=:nombre_Doctor,
                 idpaciente=:idpaciente";
 
     echo $query;
@@ -64,7 +62,6 @@ class Cita
     $stmt->bindParam(":nombre_Paciente", $this->nombre_Paciente);
     $stmt->bindParam(":apellido_Paciente", $this->apellido_Paciente);
     $stmt->bindParam(":num_Consultorio", $this->num_Consultorio);
-    $stmt->bindParam(":nombre_Doctor", $this->nombre_Doctor);
     $stmt->bindParam(":idpaciente", $this->idpaciente);
 
     // execute query
@@ -90,8 +87,7 @@ class Cita
             hora_Cita=:hora_Cita,
             nombre_Paciente=:nombre_Paciente, 
             apellido_Paciente=:apellido_Paciente, 
-            num_Consultorio=:num_Consultorio, 
-            nombre_Doctor=:nombre_Doctor
+            num_Consultorio=:num_Consultorio,
             WHERE
                 idcita=:idcita";
 
@@ -104,7 +100,6 @@ class Cita
     $stmt->bindParam(":nombre_Paciente", $this->nombre_Paciente);
     $stmt->bindParam(":apellido_Paciente", $this->apellido_Paciente);
     $stmt->bindParam(":num_Consultorio", $this->num_Consultorio);
-    $stmt->bindParam(":nombre_Doctor", $this->nombre_Doctor);
     $stmt->bindParam(":idcita", $this->idcita);    
     // execute the query
     if($stmt->execute())
@@ -142,7 +137,7 @@ class Cita
 
         // query to read single record
         $query = "SELECT
-                    idcita, fecha_Cita, hora_Cita, nombre_Paciente, apellido_Paciente, num_Consultorio, nombre_Doctor
+                    idcita, fecha_Cita, hora_Cita, nombre_Paciente, apellido_Paciente, num_Consultorio
                 FROM
                     " . $this->table_name ." 
                 WHERE
@@ -165,7 +160,7 @@ class Cita
 
         // query to read single record
         $query = "SELECT
-                    idcita, fecha_Cita, hora_Cita, nombre_Paciente, apellido_Paciente, num_Consultorio, nombre_Doctor
+                    idcita, fecha_Cita, hora_Cita, nombre_Paciente, apellido_Paciente, num_Consultorio
                 FROM
                     " . $this->table_name ." 
                 WHERE
@@ -190,7 +185,7 @@ class Cita
 
     
     $query = "SELECT
-    idcita, fecha_Cita, hora_Cita, nombre_Paciente, apellido_Paciente, num_Consultorio, nombre_Doctor, num_Expediente
+    idcita, fecha_Cita, hora_Cita, nombre_Paciente, apellido_Paciente, num_Consultorio
             FROM    " . $this->table_name ."
             WHERE
             fecha_Cita = CURRENT_DATE ";
