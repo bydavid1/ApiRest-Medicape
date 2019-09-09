@@ -29,7 +29,6 @@ $cita->idcita = $data->idcita;
     $cita->nombre_Paciente = $data->nombre_Paciente;
     $cita->apellido_Paciente = $data->apellido_Paciente;
     $cita->num_Consultorio = $data->num_Consultorio;
-    $cita->nombre_Doctor = $data->nombre_Doctor;
 
 // update the product
 if($cita->update()){

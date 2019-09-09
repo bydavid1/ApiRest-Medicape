@@ -27,7 +27,6 @@ if  (
     !empty($data->nombre_Paciente) &&
     !empty($data->apellido_Paciente) &&
     !empty($data->num_Consultorio) &&
-    !empty($data->nombre_Doctor) &&
     !empty($data->idpaciente)
     )
 {
@@ -38,7 +37,6 @@ if  (
     $cita->nombre_Paciente = $data->nombre_Paciente;
     $cita->apellido_Paciente = $data->apellido_Paciente;
     $cita->num_Consultorio = $data->num_Consultorio;
-    $cita->nombre_Doctor = $data->nombre_Doctor;
     $cita->idpaciente = $data->idpaciente;
 
     // create the product

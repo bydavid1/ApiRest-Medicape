@@ -39,8 +39,7 @@ if($num>0){
             "hora_Cita" => $hora_Cita,
             "nombre_Paciente" => $nombre_Paciente,
             "apellido_Paciente" => $apellido_Paciente,
-            "num_Consultorio" => $num_Consultorio,
-            "nombre_Doctor" => $nombre_Doctor
+            "num_Consultorio" => $num_Consultorio
         );
 
         array_push($cita_arr, $cita_item);

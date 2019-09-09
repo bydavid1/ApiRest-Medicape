@@ -44,7 +44,6 @@ if($num>0){
             "nombre_Paciente" => $nombre_Paciente,
             "apellido_Paciente" => $apellido_Paciente,
             "num_Consultorio" => $num_Consultorio,
-            "nombre_Doctor" => $nombre_Doctor,
             "idpaciente" => $idpaciente
         );
 
