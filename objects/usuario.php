@@ -11,7 +11,6 @@ class Usuario{
     public $user_Password;
     public $email;
     public $user_type;
-    public $reference;
 
 // constructor with $db as database connection
     public function __construct($db)
@@ -154,7 +153,7 @@ class Usuario{
 
         // query to read single record
         $query = "SELECT
-                    iduser, user_Password, user_type, reference               
+                    iduser, user_Password, user_type              
                     FROM
                     " . $this->table_name ." 
                 WHERE
@@ -177,7 +176,6 @@ class Usuario{
         // set values to object properties
         $this->iduser = $row['iduser'];
         $this->user_Password = $row['user_Password'];
-        $this->reference = $row['reference'];
         $this->user_type = $row['user_type'];
     
         
@@ -185,10 +183,9 @@ class Usuario{
 
 //UserExists
     function userExists(){
-        $type = "user";
-        $query = "SELECT iduser, reference
+        $query = "SELECT iduser
                 FROM " . $this->table_name . "
-                WHERE user_type = '".$type."'AND user_Name = ? AND user_Password = ?
+                WHERE user_type = 2 AND user_Name = ? AND user_Password = ?
                 LIMIT 0,1";
     
         $stmt = $this->conn->prepare( $query );
@@ -205,7 +202,7 @@ class Usuario{
         if($num>0){
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
     
-            $this->reference = $row['reference'];
+      //FALTA
 
         }else{
             return false;
@@ -214,10 +211,9 @@ class Usuario{
 
    
     function adminExist(){
-        $type = "user";
-        $query = "SELECT user_type, reference
+        $query = "SELECT user_type
                 FROM " . $this->table_name . "
-                WHERE user_type <> '".$type."'AND user_Name = ? AND user_Password = ?
+                WHERE user_type = 1 AND user_Name = ? AND user_Password = ?
                 LIMIT 0,1";
     
         $stmt = $this->conn->prepare( $query );
