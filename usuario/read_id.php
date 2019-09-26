@@ -18,7 +18,7 @@ $db = $database->getConnection();
 $usuario = new Usuario($db);
 
 // set ID property of record to read
-$usuario->user_Name = isset($_GET['username']) ? $_GET['username'] : die();
+$usuario->user_Name = isset($_GET['iduser']) ? $_GET['iduser'] : die();
 
 // read the details of product to be edited
 $usuario->readId();
@@ -27,12 +27,10 @@ if($usuario->user_Name!=null)
 {
     // create array
     $usuario_arr = array(
-        "iduser" =>  $usuario->iduser,
         "user_Name" => $usuario->user_Name,
         "user_Password" => $usuario->user_Password,
         "user_type" => $usuario->user_type,
-        "reference" => $usuario->reference
-        
+        "valor" => $usuario->valor
     );
 
     // set response code - 200 OK

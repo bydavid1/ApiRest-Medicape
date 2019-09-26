@@ -11,6 +11,7 @@ class Usuario{
     public $user_Password;
     public $email;
     public $user_type;
+    public $valor;
 
 // constructor with $db as database connection
     public function __construct($db)
@@ -153,11 +154,11 @@ class Usuario{
 
         // query to read single record
         $query = "SELECT
-                    iduser, user_Password, user_type              
+                     user_Password, user_type, user_Name, permisos.valor as valor               
                     FROM
-                    " . $this->table_name ." 
+                    " . $this->table_name ." INNER JOIN permisos ON permisos.idpermisos = users.idpermisos 
                 WHERE
-                    user_Name = ?
+                    iduser = ?
                 LIMIT
                     0,1";
     
@@ -174,11 +175,10 @@ class Usuario{
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
     
         // set values to object properties
-        $this->iduser = $row['iduser'];
         $this->user_Password = $row['user_Password'];
         $this->user_type = $row['user_type'];
-    
-        
+        $this->user_Name = $row['user_Name'];
+        $this->valor = $row['valor'];
     }
 
 //UserExists
@@ -211,24 +211,29 @@ class Usuario{
 
    
     function adminExist(){
-        $query = "SELECT user_type
-                FROM " . $this->table_name . "
+        $query = "SELECT iduser, user_Name, permisos.valor as valor
+                FROM " . $this->table_name . " INNER JOIN permisos ON permisos.idpermisos = users.idpermisos
                 WHERE user_type = 1 AND user_Name = ? AND user_Password = ?
                 LIMIT 0,1";
-    
         $stmt = $this->conn->prepare( $query );
     
 
         $stmt->bindParam(1, $this->user_Name);
         $stmt->bindParam(2, $this->user_Password);
-
         $stmt->execute();
+        $num = $stmt->rowCount();
     
-
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        $this->user_type = $row['user_type'];
+        if($num == 1){
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            $this->iduser = $row['iduser'];
+            $this->valor = $row['valor'];
+            $this->user_Name = $row['user_Name'];
+            return true;
+        }else{
+            return false;
+        } 
     }
+
 function checkUser()
     {
     

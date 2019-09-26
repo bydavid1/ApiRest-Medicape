@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-09-2019 a las 00:50:47
+-- Tiempo de generación: 26-09-2019 a las 17:06:08
 -- Versión del servidor: 10.1.37-MariaDB
 -- Versión de PHP: 7.2.12
 
@@ -106,7 +106,7 @@ CREATE TABLE `empleado` (
 --
 
 INSERT INTO `empleado` (`idempleado`, `iduser`, `nombres`, `apellidos`, `fecha_Nac`, `sexo`, `estado_Civil`, `dui`, `nit`, `especialidad`, `telefono`, `celular`, `email`, `departamento`, `municipio`, `direccion`, `fecha_Contratacion`) VALUES
-(3, 0, 'Stiven', 'Jimenez', '2019-07-21', 'Masculino', 'Soltero', '90124578', '56123jkl', 'Medico General', '12457889', '231456', 'valdesHumv', 'Ahuachapán', 'El Refugio', 'Calle principal colonia El Angel', '2019-07-21');
+(3, 1, 'Stiven', 'Jimenez', '2019-07-21', 'Masculino', 'Soltero', '90124578', '56123jkl', 'Medico General', '12457889', '231456', 'valdesHumv', 'Ahuachapán', 'El Refugio', 'Calle principal colonia El Angel', '2019-07-21');
 
 -- --------------------------------------------------------
 
@@ -330,6 +330,24 @@ INSERT INTO `perfil_paciente` (`idperfil`, `fecha`, `peso`, `altura`, `temperatu
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `permisos`
+--
+
+CREATE TABLE `permisos` (
+  `idpermisos` int(11) NOT NULL,
+  `valor` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `permisos`
+--
+
+INSERT INTO `permisos` (`idpermisos`, `valor`) VALUES
+(1, 77777777);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `tips`
 --
 
@@ -360,15 +378,16 @@ CREATE TABLE `users` (
   `user_Name` varchar(60) COLLATE utf8_spanish_ci NOT NULL,
   `user_Password` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
   `email` varchar(60) COLLATE utf8_spanish_ci NOT NULL,
-  `user_type` int(11) NOT NULL
+  `user_type` int(11) NOT NULL,
+  `idpermisos` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`iduser`, `user_Name`, `user_Password`, `email`, `user_type`) VALUES
-(1, 'admin', 'admin', 'rodolfo@gamil.com', 1);
+INSERT INTO `users` (`iduser`, `user_Name`, `user_Password`, `email`, `user_type`, `idpermisos`) VALUES
+(1, 'admin', 'admin', 'rodolfo@gamil.com', 1, 1);
 
 --
 -- Índices para tablas volcadas
@@ -454,6 +473,12 @@ ALTER TABLE `perfil_paciente`
   ADD PRIMARY KEY (`idperfil`);
 
 --
+-- Indices de la tabla `permisos`
+--
+ALTER TABLE `permisos`
+  ADD PRIMARY KEY (`idpermisos`);
+
+--
 -- Indices de la tabla `tips`
 --
 ALTER TABLE `tips`
@@ -492,7 +517,7 @@ ALTER TABLE `consultas`
 -- AUTO_INCREMENT de la tabla `empleado`
 --
 ALTER TABLE `empleado`
-  MODIFY `idempleado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `idempleado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `especialidades`
@@ -534,7 +559,7 @@ ALTER TABLE `medicamentos`
 -- AUTO_INCREMENT de la tabla `paciente`
 --
 ALTER TABLE `paciente`
-  MODIFY `idpaciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `idpaciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `pending_quotes`
@@ -549,6 +574,12 @@ ALTER TABLE `perfil_paciente`
   MODIFY `idperfil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT de la tabla `permisos`
+--
+ALTER TABLE `permisos`
+  MODIFY `idpermisos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT de la tabla `tips`
 --
 ALTER TABLE `tips`
@@ -558,7 +589,7 @@ ALTER TABLE `tips`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `iduser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `iduser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

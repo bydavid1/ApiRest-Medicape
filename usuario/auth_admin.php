@@ -17,20 +17,19 @@ $db = $database->getConnection();
 
 $usuario = new Usuario($db);
 
-
 // get posted data
 $data = json_decode(file_get_contents("php://input"));
-
-
 
 // set product property values
 $usuario->user_Name = $data->user_Name;
 $usuario->user_Password = $data->user_Password;
 
-$usuario->adminExist();
-if($usuario->user_type != null)
+if($usuario->adminExist() == true)
 { 
-    $arr = $usuario->user_type;
+    $arr = array("iduser" => $usuario->iduser,
+                 "valor" => $usuario->valor,
+                 "user_Name" => $usuario->user_Name
+                );
     http_response_code(200);
 
     echo json_encode($arr);
