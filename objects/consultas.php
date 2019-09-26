@@ -197,5 +197,22 @@ $this->nom_Doctor = $row['nom_Doctor'];
     return $stmt;
     }
 
+    function CountConsult()
+    {
+    // select all query
+    $query = "SELECT
+            COUNT(*) total
+            FROM
+                " . $this->table_name ."
+            WHERE
+            fecha = CURRENT_DATE ";
+    // prepare query statement
+    $stmt = $this->conn->prepare($query);
+    // execute query
+    $stmt->execute();
+
+    return $stmt;
+    }
+
 
 }

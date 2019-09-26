@@ -212,4 +212,20 @@ class Paciente{
     return $stmt;
 }
 
+
+function CountPaciente()
+    {
+    // select all query
+    $query = "SELECT
+            COUNT(*) total
+            FROM
+                " . $this->table_name;
+    // prepare query statement
+    $stmt = $this->conn->prepare($query);
+    // execute query
+    $stmt->execute();
+
+    return $stmt;
+    }
+
 }

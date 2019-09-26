@@ -268,11 +268,26 @@ class Empleado{
     // bind
     $stmt->bindParam(1, $keywords);
     $stmt->bindParam(2, $keywords);
- 
+
 
     // execute query
     $stmt->execute();
     
+    return $stmt;
+    }
+
+    function CountEmple()
+    {
+    // select all query
+    $query = "SELECT
+            COUNT(*) total
+            FROM
+                " . $this->table_name;
+    // prepare query statement
+    $stmt = $this->conn->prepare($query);
+    // execute query
+    $stmt->execute();
+
     return $stmt;
     }
 }
