@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-09-2019 a las 17:06:08
--- Versión del servidor: 10.1.37-MariaDB
--- Versión de PHP: 7.2.12
+-- Tiempo de generación: 26-09-2019 a las 19:09:02
+-- Versión del servidor: 10.3.15-MariaDB
+-- Versión de PHP: 7.1.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -348,6 +348,28 @@ INSERT INTO `permisos` (`idpermisos`, `valor`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `tareas`
+--
+
+CREATE TABLE `tareas` (
+  `idtarea` int(11) NOT NULL,
+  `tarea` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
+  `lugar_Tarea` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
+  `hora_Tarea` time NOT NULL,
+  `fecha_Tarea` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `tareas`
+--
+
+INSERT INTO `tareas` (`idtarea`, `tarea`, `lugar_Tarea`, `hora_Tarea`, `fecha_Tarea`) VALUES
+(1, 'Reunion de Doctores', 'Sala de Reuniones', '14:11:14', '2019-09-26'),
+(2, 'Reunion de Doctoras', 'Sala de Reuniones', '20:12:08', '2019-09-26');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `tips`
 --
 
@@ -479,6 +501,12 @@ ALTER TABLE `permisos`
   ADD PRIMARY KEY (`idpermisos`);
 
 --
+-- Indices de la tabla `tareas`
+--
+ALTER TABLE `tareas`
+  ADD PRIMARY KEY (`idtarea`);
+
+--
 -- Indices de la tabla `tips`
 --
 ALTER TABLE `tips`
@@ -578,6 +606,12 @@ ALTER TABLE `perfil_paciente`
 --
 ALTER TABLE `permisos`
   MODIFY `idpermisos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `tareas`
+--
+ALTER TABLE `tareas`
+  MODIFY `idtarea` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `tips`
