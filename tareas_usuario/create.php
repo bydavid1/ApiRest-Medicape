@@ -10,12 +10,12 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 include_once '../config/database.php';
 
 // instantiate product object
-include_once '../objects/tareas.php';
+include_once '../objects/tareas_users.php';
 
 $database = new Database();
 $db = $database->getConnection();
 
-$tarea = new Tarea($db);
+$tarea = new TareaUs($db);
 
 // get posted data
 $data = json_decode(file_get_contents("php://input"));
@@ -26,16 +26,18 @@ if  (
     !empty($data->lugar) &&
     !empty($data->hora) &&
     !empty($data->fecha) &&
-    !empty($data->descripcion)
+    !empty($data->descripcion) &&
+    !empty($data->idusers)
     )
 {
 
     // set product property values
     $tarea->tarea = $data->tarea;
+    $tarea->descripcion = $data->descripcion;
     $tarea->lugar = $data->lugar;
     $tarea->hora = $data->hora;
     $tarea->fecha = $data->fecha;
-    $tarea->descripcion = $data->descripcion;
+    $tarea->idusers = $data->idusers;
 
     // create the product
     if($tarea->create())

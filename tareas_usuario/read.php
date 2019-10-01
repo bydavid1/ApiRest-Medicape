@@ -1,45 +1,50 @@
 <?php
 // required headers
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: access");
-header("Access-Control-Allow-Methods: GET");
-header("Access-Control-Allow-Credentials: true");
-header('Content-Type: application/json');
+header("Content-Type: application/json; charset=UTF-8");
 
+// database connection will be here
 // include database and object files
 include_once '../config/database.php';
-include_once '../objects/tareas.php';
+include_once '../objects/tareas_users.php';
 
-// get database connection
+// instantiate database and product object
 $database = new Database();
 $db = $database->getConnection();
 
-// prepare product object
-$tarea = new Tarea($db);
+// initialize object
+$tarea = new TareaUs($db);
 
-// set ID property of record to read
-$tarea->idtarea = isset($_GET['idtarea']) ? $_GET['idtarea'] : die();
+// read products will be here
 
-// read the details of product to be edited
-$stmt = $tarea->readById();
+// query products
+$stmt = $tarea->read();
 $num = $stmt->rowCount();
-$tarea_arr=array();
+
+// check if more than 0 record found
 if($num>0){
 
+    // products array
     $tarea_arr=array();
     $tarea_arr =array();
 
+    // retrieve our table contents
+    // fetch() is faster than fetchAll()
+    // http://stackoverflow.com/questions/2770630/pdofetchall-vs-pdofetch-in-a-loop
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-
+        // extract row
+        // this will make $row['name'] to
+        // just $name only
         extract($row);
 
         $tarea_item=array(
-            "idtarea" => $idtarea,
+            "idUtarea" => $idUtarea,
             "tarea" => $tarea,
+            "descripcion" => $descripcion,
             "lugar" => $lugar,
             "hora" => $hora,
             "fecha" => $fecha,
-            "descripcion" => $descripcion
+            "idusers" => $idusers
         
         );
 
@@ -59,7 +64,6 @@ else{
 
     // tell the user no products found
     echo json_encode(
-        array("message" => "No quotes found.")
+        array("message" => "No products found.")
     );
 }
-?>

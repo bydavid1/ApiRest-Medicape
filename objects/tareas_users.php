@@ -1,17 +1,19 @@
 <?php
-class Tarea
+class TareaUs
 {
 // database connection and table name
     private $conn;
-    private $table_name = "tareas";
+    private $table_name = "tareas_usuarios";
 
     // object properties
-    public $idtarea;
+    public $idUtarea;
     public $tarea;
+    public $descripcion;
     public $lugar;
     public $hora;
     public $fecha;
-    public $descripcion;
+    public $idusers;
+
 
 
 // constructor with $db as database connection
@@ -44,11 +46,12 @@ class Tarea
     // query to insert record
     $query = "INSERT INTO " . $this->table_name . " 
                 SET  
-                tarea=:tarea, 
+                tarea=:tarea,
+                descripcion=:descripcion, 
                 lugar=:lugar, 
                 hora=:hora, 
                 fecha=:fecha,
-                descripcion=:descripcion";
+                idusers=:idusers";
 
     echo $query;
     // prepare query
@@ -56,10 +59,11 @@ class Tarea
 
     // bind values
     $stmt->bindParam(":tarea", $this->tarea);
+    $stmt->bindParam(":descripcion", $this->descripcion);
     $stmt->bindParam(":lugar", $this->lugar);
     $stmt->bindParam(":hora", $this->hora);
     $stmt->bindParam(":fecha", $this->fecha);
-    $stmt->bindParam(":descripcion", $this->descripcion);
+    $stmt->bindParam(":idusers", $this->idusers);
     // execute query
     if($stmt->execute())
     {
@@ -80,23 +84,25 @@ class Tarea
                 " . $this->table_name . "
             SET
             tarea=:tarea,
+            descripcion=:descripcion,
             lugar=:lugar,
             hora=:hora, 
             fecha=:fecha,
-            descripcion=:descripcion        
+            idusers=:idusers        
             WHERE
-            idtarea=:idtarea";
+            idUtarea=:idUtarea";
 
     // prepare query statement
     $stmt = $this->conn->prepare($query);
 
     // bind new values
     $stmt->bindParam(":tarea", $this->tarea);
+    $stmt->bindParam(":descripcion", $this->descripcion);
     $stmt->bindParam(":lugar", $this->lugar);
     $stmt->bindParam(":hora", $this->hora);
     $stmt->bindParam(":fecha", $this->fecha);
-    $stmt->bindParam(":descripcion", $this->descripcion);
-    $stmt->bindParam(":idtarea", $this->idtarea);    
+    $stmt->bindParam(":idusers", $this->idusers);
+    $stmt->bindParam(":idUtarea", $this->idUtarea);    
     // execute the query
     if($stmt->execute())
     {
@@ -110,13 +116,13 @@ class Tarea
     {
 
     // delete query
-    $query = "DELETE FROM " . $this->table_name . " WHERE idtarea = ?";
+    $query = "DELETE FROM " . $this->table_name . " WHERE idUtarea = ?";
 
     // prepare query
     $stmt = $this->conn->prepare($query);
 
     // bind id of record to delete
-    $stmt->bindParam(1, $this->idtarea);
+    $stmt->bindParam(1, $this->idUtarea);
 
     // execute query
     if($stmt->execute())
@@ -137,13 +143,13 @@ class Tarea
                 FROM
                     " . $this->table_name ." 
                 WHERE
-                idtarea = ?";
+                idUtarea = ?";
     
         // prepare query statement
         $stmt = $this->conn->prepare( $query );
     
         // bind id of product to be updated
-        $stmt->bindParam(1, $this->idtarea);
+        $stmt->bindParam(1, $this->idUtarea);
     
         // execute query
         $stmt->execute();
@@ -166,6 +172,30 @@ class Tarea
     $stmt = $this->conn->prepare($query);
     // execute query
     $stmt->execute();
+    return $stmt;
+    }
+
+
+    function searchTask()
+    {
+
+    // select all query
+    $query = "SELECT
+                *
+                FROM
+            " . $this->table_name ." 
+            WHERE
+            idusers = ?";
+
+// prepare query statement
+    $stmt = $this->conn->prepare( $query );
+
+// bind id of product to be updated
+    $stmt->bindParam(1, $this->idusers);
+
+// execute query
+    $stmt->execute();
+
     return $stmt;
     }
 

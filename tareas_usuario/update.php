@@ -8,27 +8,28 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 // include database and object files
 include_once '../config/database.php';
-include_once '../objects/tareas.php';
+include_once '../objects/tareas_users.php';
 
 // get database connection
 $database = new Database();
 $db = $database->getConnection();
 
 // prepare product object
-$tarea = new Tarea($db);
+$tarea = new TareaUs($db);
 
 // get id of product to be edited
 $data = json_decode(file_get_contents("php://input"));
 
 // set ID property of product to be edited
-$tarea->idtarea = $data->idtarea;
+$tarea->idUtarea = $data->idUtarea;
 
 // set product property values
     $tarea->tarea = $data->tarea;
+    $tarea->descripcion = $data->descripcion;
     $tarea->lugar = $data->lugar;
     $tarea->hora = $data->hora;
     $tarea->fecha = $data->fecha;
-    $tarea->descripcion = $data->descripcion;
+    $tarea->idusers = $data->idusers;
 
 // update the product
 if($tarea->update()){

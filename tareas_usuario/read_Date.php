@@ -6,14 +6,14 @@ header("Content-Type: application/json; charset=UTF-8");
 // database connection will be here
 // include database and object files
 include_once '../config/database.php';
-include_once '../objects/tareas.php';
+include_once '../objects/tareas_users.php';
 
 // instantiate database and product object
 $database = new Database();
 $db = $database->getConnection();
 
 // initialize object
-$tarea = new Tarea($db);
+$tarea = new TareaUs($db);
 
 // read products will be here
 // read products
@@ -39,12 +39,13 @@ if($num>0){
         extract($row);
 
         $tarea_item=array(
-            "idtarea" => $idtarea,
+            "idUtarea" => $idUtarea,
+            "descripcion" => $descripcion,
             "tarea" => $tarea,
             "lugar" => $lugar,
             "hora" => $hora,
             "fecha" => $fecha,
-            "descripcion" => $descripcion
+            "idusers" => $idusers
         );
 
         array_push($tarea_arr, $tarea_item);

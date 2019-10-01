@@ -8,17 +8,17 @@ header('Content-Type: application/json');
 
 // include database and object files
 include_once '../config/database.php';
-include_once '../objects/tareas.php';
+include_once '../objects/tareas_users.php';
 
 // get database connection
 $database = new Database();
 $db = $database->getConnection();
 
 // prepare product object
-$tarea = new Tarea($db);
+$tarea = new TareaUs($db);
 
 // set ID property of record to read
-$tarea->idtarea = isset($_GET['idtarea']) ? $_GET['idtarea'] : die();
+$tarea->idUtarea = isset($_GET['idUtarea']) ? $_GET['idUtarea'] : die();
 
 // read the details of product to be edited
 $stmt = $tarea->readById();
@@ -34,12 +34,13 @@ if($num>0){
         extract($row);
 
         $tarea_item=array(
-            "idtarea" => $idtarea,
+            "idUtarea" => $idUtarea,
+            "descripcion" => $descripcion,
             "tarea" => $tarea,
             "lugar" => $lugar,
             "hora" => $hora,
             "fecha" => $fecha,
-            "descripcion" => $descripcion
+            "idusers" => $idusers
         
         );
 

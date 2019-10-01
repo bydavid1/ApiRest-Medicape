@@ -40,9 +40,10 @@ if($num>0){
         $tarea_item=array(
             "idtarea" => $idtarea,
             "tarea" => $tarea,
-            "lugar_Tarea" => $lugar_Tarea,
-            "hora_Tarea" => $hora_Tarea,
-            "fecha_Tarea" => $fecha_Tarea
+            "lugar" => $lugar,
+            "hora" => $hora,
+            "fecha" => $fecha,
+            "descripcion" => $descripcion
         
         );
 

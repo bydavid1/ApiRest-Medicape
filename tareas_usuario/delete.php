@@ -6,47 +6,40 @@ header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-// include database and object files
+// include database and object file
 include_once '../config/database.php';
-include_once '../objects/tareas.php';
+include_once '../objects/tareas_users.php';
 
 // get database connection
 $database = new Database();
 $db = $database->getConnection();
 
 // prepare product object
-$tarea = new Tarea($db);
+$tarea = new TareaUs($db);
 
-// get id of product to be edited
+// get product id
 $data = json_decode(file_get_contents("php://input"));
 
-// set ID property of product to be edited
-$tarea->idtarea = $data->idtarea;
+// set product id to be deleted
+$tarea->idUtarea = $data->idUtarea;
 
-// set product property values
-    $tarea->tarea = $data->tarea;
-    $tarea->lugar = $data->lugar;
-    $tarea->hora = $data->hora;
-    $tarea->fecha = $data->fecha;
-    $tarea->descripcion = $data->descripcion;
-
-// update the product
-if($tarea->update()){
+// delete the product
+if($tarea->delete()){
 
     // set response code - 200 ok
     http_response_code(200);
 
     // tell the user
-    echo json_encode(array("message" => "event was updated."));
+    echo json_encode(array("message" => "Quotes was deleted."));
 }
 
-// if unable to update the product, tell the user
+// if unable to delete the product
 else{
 
     // set response code - 503 service unavailable
     http_response_code(503);
 
     // tell the user
-    echo json_encode(array("message" => "Unable to update event."));
+    echo json_encode(array("message" => "Unable to delete Quotes."));
 }
 ?>

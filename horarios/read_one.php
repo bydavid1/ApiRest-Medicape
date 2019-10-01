@@ -6,51 +6,50 @@ header("Access-Control-Allow-Methods: GET");
 header("Access-Control-Allow-Credentials: true");
 header('Content-Type: application/json');
 
-// include database and object files
-include_once '../config/database.php';
-include_once '../objects/tareas.php';
 
-// get database connection
+include_once '../config/database.php';
+include_once '../objects/horarios.php';
+
+
 $database = new Database();
 $db = $database->getConnection();
 
-// prepare product object
-$tarea = new Tarea($db);
+$horario = new Horario($db);
 
-// set ID property of record to read
-$tarea->idtarea = isset($_GET['idtarea']) ? $_GET['idtarea'] : die();
 
-// read the details of product to be edited
-$stmt = $tarea->readById();
+$horario->Idhorario = isset($_GET['Idhorario']) ? $_GET['Idhorario'] : die();
+
+
+$stmt = $horario->readOne();
 $num = $stmt->rowCount();
-$tarea_arr=array();
+$horario_arr=array();
+
 if($num>0){
 
-    $tarea_arr=array();
-    $tarea_arr =array();
+    $horario_arr=array();
+    $horario_arr =array();
 
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
 
         extract($row);
 
-        $tarea_item=array(
-            "idtarea" => $idtarea,
-            "tarea" => $tarea,
-            "lugar" => $lugar,
-            "hora" => $hora,
-            "fecha" => $fecha,
-            "descripcion" => $descripcion
-        
+        $horario_item=array(
+            "Idhorario" => $Idhorario,
+            "tiempo_cita" => $tiempo_cita,
+            "numero_cita" => $numero_cita,
+            "hora_inicio" => $hora_inicio,
+            "hora_final" => $hora_final,
+            "idDoc" => $idDoc
         );
 
-        array_push($tarea_arr, $tarea_item);
+        array_push($horario_arr, $horario_item);
     }
 
     // set response code - 200 OK
     http_response_code(200);
 
     // show products data in json format
-    echo json_encode($tarea_arr);
+    echo json_encode($horario_arr);
 }
 else{
 
