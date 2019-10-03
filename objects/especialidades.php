@@ -32,4 +32,39 @@ class Especialidades
        //Falta crear 
     }
 
+    function updatePublic()
+    {
+        if($this->publico == 1){
+            $query = "UPDATE 
+            " . $this->table_name . " SET publico = 0 WHERE idespecialidad = :idespecialidad";
+            echo $query;
+        }else if($this->publico == 0){
+            $query = "UPDATE 
+            " . $this->table_name . " SET publico = 1 WHERE idespecialidad = :idespecialidad";
+        }else{
+            return false;
+        }
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":idespecialidad", $this->idespecialidad);
+        if($stmt->execute())
+        {
+            return true;
+        }
+        return false;
+    }
+
+    function update()
+    {
+      $query = "UPDATE 
+            " . $this->table_name . " SET nombre = :nombre WHERE idespecialidad = :idespecialidad";
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":idespecialidad", $this->idespecialidad);
+        $stmt->bindParam(":nombre", $this->nombre);
+        if($stmt->execute())
+        {
+            return true;
+        }
+        return false;
+    }
 }
