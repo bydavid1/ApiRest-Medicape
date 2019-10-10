@@ -18,7 +18,7 @@ include_once '../objects/empleado.php';
     {
     // select all query
     $query = "SELECT
-                idempleado, nombres, apellidos, fecha_Nac, sexo, estado_Civil, dui, nit, especialidad, telefono, celular, email, departamento, municipio, direccion, antecedentes,  solvencia,  constancia_Titulo,  certificado_Salud, fecha_Contratacion
+                idempleado, nombres, apellidos, fecha_Nac, sexo, estado_Civil, dui, nit, idespecialidad, telefono, celular, email, departamento, municipio, direccion, antecedentes,  solvencia,  constancia_Titulo,  certificado_Salud, fecha_Contratacion
             FROM
                 " . $this->table_name;
     // prepare query statement
@@ -51,7 +51,7 @@ include_once '../objects/empleado.php';
             "estado_Civil" => $estado_Civil,
             "dui" => $dui,
             "nit" => $nit,
-            "especialidad" => $especialidad,
+            "idespecialidad" => $idespecialidad,
             "telefono" => $telefono,
             "celular" => $celular,
             "email" => $email,

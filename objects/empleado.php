@@ -15,6 +15,7 @@ class Empleado{
     public $dui;
     public $nit;
     public $especialidad;
+    public $idespecialidad;
     public $telefono;
     public $celular;
     public $email;
@@ -35,7 +36,7 @@ class Empleado{
     {
     // select all query
     $query = "SELECT
-                idempleado, nombres, apellidos, fecha_Nac, sexo, estado_Civil, dui, nit, especialidad, telefono, celular, email, departamento, municipio, direccion, fecha_Contratacion
+                idempleado, nombres, apellidos, fecha_Nac, sexo, estado_Civil, dui, nit, idespecialidad, telefono, celular, email, departamento, municipio, direccion, fecha_Contratacion
             FROM
                 " . $this->table_name;
     // prepare query statement
@@ -49,6 +50,16 @@ class Empleado{
 // create product
     function create()
     {
+        $sql = "SELECT idespecialidad FROM especialidades WHERE nombre = '" . $this->especialidad . "'";
+         echo $sql;
+        $res = $this->conn->prepare($sql);
+
+        $res->execute();
+
+        $row = $res->fetch(PDO::FETCH_ASSOC);
+    
+        // set values to object properties
+        $this->idespecialidad = $row['idespecialidad'];
     // query to insert record
     $query = "INSERT INTO " . $this->table_name . " 
             SET  nombres=:nombres, 
@@ -58,7 +69,7 @@ class Empleado{
                 estado_Civil=:estado_Civil, 
                 dui=:dui, 
                 nit=:nit, 
-                especialidad=:especialidad, 
+                idespecialidad=:idespecialidad, 
                 telefono=:telefono, 
                 celular=:celular, 
                 email=:email, 
@@ -79,7 +90,7 @@ class Empleado{
     $stmt->bindParam(":estado_Civil", $this->estado_Civil);
     $stmt->bindParam(":dui", $this->dui);
     $stmt->bindParam(":nit", $this->nit);
-    $stmt->bindParam(":especialidad", $this->especialidad);
+    $stmt->bindParam(":idespecialidad", $this->idespecialidad);
     $stmt->bindParam(":telefono", $this->telefono);
     $stmt->bindParam(":celular", $this->celular);
     $stmt->bindParam(":email", $this->email);
@@ -178,7 +189,7 @@ class Empleado{
 
         // query to read single record
         $query = "SELECT
-                idempleado, nombres, apellidos, fecha_Nac, sexo, estado_Civil, dui, nit, especialidad, telefono, celular, email, departamento, municipio, direccion, fecha_Contratacion
+                idempleado, nombres, apellidos, fecha_Nac, sexo, estado_Civil, dui, nit, idespecialidad, telefono, celular, email, departamento, municipio, direccion, fecha_Contratacion
                 FROM
                     " . $this->table_name ." 
                 WHERE
@@ -206,7 +217,7 @@ class Empleado{
         $this->estado_Civil = $row['estado_Civil'];
         $this->dui = $row['dui'];
         $this->nit = $row['nit'];
-        $this->especialidad = $row['especialidad'];
+        $this->idespecialidad = $row['idespecialidad'];
         $this->telefono = $row['telefono'];
         $this->celular = $row['celular'];
         $this->email = $row['email'];
@@ -214,7 +225,14 @@ class Empleado{
         $this->municipio = $row['municipio'];
         $this->direccion = $row['direccion'];
         $this->fecha_Contratacion = $row['fecha_Contratacion'];
-        
+
+        $sql = "SELECT nombre FROM especialidades WHERE idespecialidad = " . $this->idespecialidad;
+        $res = $this->conn->prepare($sql);    
+        $res->execute();
+
+        $result = $res->fetch(PDO::FETCH_ASSOC);
+    
+        $this->especialidad = $result['nombre'];    
     }
 
     //search
