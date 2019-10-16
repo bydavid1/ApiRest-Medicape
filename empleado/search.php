@@ -19,29 +19,23 @@ $paciente = new Empleado($db);
 
 $keywords=isset($_GET["query"]) ? $_GET["query"] : "";
 
-// query products
 $stmt = $paciente->search($keywords);
 $num = $stmt->rowCount();
 
-// check if more than 0 record found
 if($num>0){
 
-    // products array
     $empleado_arr=array();
 
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-        // extract row
-        // this will make $row['name'] to
-        // just $name only
+
         extract($row);
 
         $empleado_item=array(
             "idempleado" => $idempleado,
             "nombres" => $nombres,
             "apellidos" =>$apellidos,
-            "fecha_Nac" =>$fecha_Nac,
-            "especialidad" => $especialidad
-            
+            "especialidad" => $especialidad,
+            "email" => $email
         );
 
         array_push($empleado_arr, $empleado_item);

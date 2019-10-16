@@ -19,14 +19,15 @@ $usuario = new Usuario($db);
 
 // get posted data
 $data = json_decode(file_get_contents("php://input"));
+$idempleado = isset($_GET['idempleado']) ? $_GET['idempleado'] : die();
 
 // make sure data is not empty
 if  (
     !empty($data->user_Name) &&
     !empty($data->user_Password) &&
     !empty($data->email) &&
-    !empty($data->user_type) 
-
+    !empty($data->user_type) &&
+    !empty($data->valor)
     )
 {
 
@@ -35,9 +36,10 @@ if  (
     $usuario->user_Password = $data->user_Password;
     $usuario->email = $data->email;
     $usuario->user_type = $data->user_type;
+    $usuario->valor = $data->valor;
 
     // create the product
-    if($usuario->create())
+    if($usuario->create($idempleado))
     {
         // set response code - 201 created
         http_response_code(201);

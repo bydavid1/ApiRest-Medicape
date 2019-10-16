@@ -35,26 +35,55 @@ class Usuario{
     return $stmt;
     }
 
-// createExam
-    function create()
+    function create($idempleado)
     {
-    // query to insert record
+
     $query = "INSERT INTO " . $this->table_name . " SET  user_Name=:user_Name, user_Password=:user_Password, email=:email, user_type=:user_type";
 
-    echo $query;
-    // prepare query
     $stmt = $this->conn->prepare($query);
 
-    // bind values
     $stmt->bindParam(":user_Name", $this->user_Name);
     $stmt->bindParam(":user_Password", $this->user_Password);
     $stmt->bindParam(":email", $this->email);
     $stmt->bindParam(":user_type", $this->user_type);
     
-    // execute query
     if($stmt->execute())
     {
-        return true;
+    $iduser = $this->conn->lastInsertId();
+
+    $sql = "INSERT INTO permisos SET valor=:valor";
+
+    $stmt = $this->conn->prepare($sql);
+
+    $stmt->bindParam(":valor", $this->valor);
+    
+    if($stmt->execute())
+    {
+        $idpermisos = $this->conn->lastInsertId();
+
+        $sql2 = "UPDATE users SET idpermisos = $idpermisos WHERE iduser = $iduser";
+
+        $stmt = $this->conn->prepare($sql2);
+
+        if($stmt->execute()){
+            $sql3 = "UPDATE empleado SET iduser = $iduser WHERE idempleado = $idempleado";
+
+            $stmt = $this->conn->prepare($sql3);
+    
+            if($stmt->execute()){
+               return true;
+            }else{
+                return false;
+            }
+        }else {
+            return false;
+        }
+    }else{
+        return false;
+    }
+
+    }else{
+        return false;
     }
 
     return false;
@@ -286,11 +315,19 @@ function checkUser()
     return false;
     }
 
-
-
-
-
-
+    function UpdatePermission($type, $condition)
+    {
+        if($type == "especialty"){
+            $query = "UPDATE permisos SET valor = " . $this->valor . " WHERE idpermisos = (SELECT idpermisos FROM users WHERE iduser = (SELECT iduser FROM empleado WHERE idespecialidad = " . $condition . "))";
     
+        $stmt = $this->conn->prepare($query);
+
+        if($stmt->execute())
+        {
+        return true;
+        }
+        return false;
+        }
+    }
 
 }

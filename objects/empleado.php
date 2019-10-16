@@ -240,12 +240,9 @@ class Empleado{
     {
 
     // select all query
-    $query = "SELECT
-            idempleado, nombres, apellidos, especialidad, fecha_Nac
-            FROM
-                " . $this->table_name . " 
-            WHERE
-            nombres LIKE ? OR apellidos LIKE ? OR especialidad LIKE ? ";
+    $query = "SELECT idempleado, nombres, apellidos, email, especialidades.nombre as especialidad 
+    FROM empleado INNER JOIN especialidades ON empleado.idespecialidad = especialidades.idespecialidad 
+    WHERE empleado.idespecialidad > 0 AND (nombres LIKE ? OR apellidos LIKE ?) ";
 
     // prepare query statement
     $stmt = $this->conn->prepare($query);
@@ -257,7 +254,6 @@ class Empleado{
     // bind
     $stmt->bindParam(1, $keywords);
     $stmt->bindParam(2, $keywords);
-    $stmt->bindParam(3, $keywords);
 
     // execute query
     $stmt->execute();
