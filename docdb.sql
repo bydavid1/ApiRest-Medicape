@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-10-2019 a las 19:03:56
--- Versión del servidor: 10.1.37-MariaDB
--- Versión de PHP: 7.2.12
+-- Tiempo de generación: 17-10-2019 a las 14:24:59
+-- Versión del servidor: 10.4.8-MariaDB
+-- Versión de PHP: 7.3.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -75,6 +75,13 @@ CREATE TABLE `consultas` (
   `idempleado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `consultas`
+--
+
+INSERT INTO `consultas` (`idconsulta`, `fecha`, `hora`, `nombres`, `apellidos`, `num_Consultorio`, `idpaciente`, `idempleado`) VALUES
+(1, '2019-10-16', '07:58', 'Maria', 'Gozalez', 63, 6, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -107,7 +114,9 @@ CREATE TABLE `empleado` (
 
 INSERT INTO `empleado` (`idempleado`, `iduser`, `nombres`, `apellidos`, `fecha_Nac`, `sexo`, `estado_Civil`, `dui`, `nit`, `idespecialidad`, `telefono`, `celular`, `email`, `departamento`, `municipio`, `direccion`, `fecha_Contratacion`) VALUES
 (3, 1, 'Stiven', 'Jimenez', '2019-07-21', 'Masculino', 'Soltero', '90124578', '56123jkl', 0, '12457889', '231456', 'valdesHumv', 'Ahuachapán', 'El Refugio', 'Calle principal colonia El Angel', '2019-07-21'),
-(4, 0, 'Cscsaccxzcxz', 'Cxzcxzcxz', '2000-01-01', 'Femenino', 'Soltero', '323243243', '432432432432432', 2, '43243243', '43432432', 'fdfdsfdfds@ddd.bn', 'Gfdgfdgfd', 'Gfdfdggfd', 'Gfdfd', '2019-10-10');
+(4, 0, 'Carlos', 'Henriquez', '2000-01-01', 'Femenino', 'Soltero', '323243243', '432432432432432', 2, '43243243', '43432432', 'fdfdsfdfds@ddd.bn', 'Gfdgfdgfd', 'Gfdfdggfd', 'Gfdfd', '2019-10-10'),
+(5, 2, 'Byron', 'Jimenez', '2000-01-18', 'Masculino', 'Soltero', '53886677-5', '5752-555255-885-8', 1, '5488-5545', '5485-6558', 'byejsjs@jajaa.jsk', 'Hsjaja', 'Jqjqjs', 'Jsjajq', '2019-10-16'),
+(6, 0, 'Jorge', 'Gutiérrez ', '2019-10-16', 'Masculino', 'Soltero', '42285387-5', '5588-245655-558-5', 1, '2555-5555', '5554-8855', 'jsjjsjw@jskkw.ks', 'Jsjwjkwkw', 'Jwjsjsjwks', 'Jsjskskkw', '2019-10-16');
 
 -- --------------------------------------------------------
 
@@ -127,7 +136,9 @@ CREATE TABLE `especialidades` (
 
 INSERT INTO `especialidades` (`idespecialidad`, `nombre`, `publico`) VALUES
 (1, 'Doctor', 1),
-(2, 'Enfermera', 0);
+(2, 'Enfermera', 0),
+(3, 'ginecologia', 1),
+(4, 'Pediatría ', 1);
 
 -- --------------------------------------------------------
 
@@ -207,7 +218,8 @@ INSERT INTO `item_expediente` (`iditemexp`, `diagnostico`, `tratamiento`, `obser
 (24, 'diag', 'trat', 'obs', 'rec', 'exa', 4, 19),
 (25, 'jajaja', 'jajajajaja', 'ajjajajajajaja', 'jajajajajajajajjaja', 'aajajajajajajajajajjajajaa', 4, 25),
 (26, 'hrh', 'ghgh', 'ghggh', 'er1', 'ef', 5, 26),
-(27, 'swdasdas', 'ssadsdasd', 'sdasd', 'sad', 'sadsad', 10, 27);
+(27, 'swdasdas', 'ssadsdasd', 'sdasd', 'sad', 'sadsad', 10, 27),
+(28, 'Jjskwkwks', 'Jwiwkwks', 'Jwjwjjwjw', 'Jwuwuuwjw', 'Uwuwiwkkwjw', 6, 1);
 
 -- --------------------------------------------------------
 
@@ -272,7 +284,7 @@ CREATE TABLE `paciente` (
   `departamento` varchar(60) COLLATE utf8_spanish_ci NOT NULL,
   `municipio` varchar(60) COLLATE utf8_spanish_ci NOT NULL,
   `direccion` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
-  `telefono` int(11) NOT NULL
+  `telefono` varchar(11) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
@@ -280,8 +292,9 @@ CREATE TABLE `paciente` (
 --
 
 INSERT INTO `paciente` (`idpaciente`, `iduser`, `nombres`, `apellidos`, `fecha_Nac`, `sexo`, `estado_Civil`, `dui`, `email`, `departamento`, `municipio`, `direccion`, `telefono`) VALUES
-(4, 0, 'Byron David', 'Martinez Jiménez', '2019-07-23', 'Masculino', 'Soltero', '123456782', 'byronjimenez9911@gmail.com', 'Ahuachapán', 'El Refugio', 'El Refugio calle 5', 12345102),
-(5, 0, 'Prueba', 'Prueba', '2000-02-14', 'Masculino', 'Casado', '213232312', 'gasdf@gmail.com', 'Sadasdas', 'Sadasd', 'Easdasd', 23121232);
+(4, 0, 'Byron David', 'Martinez Jiménez', '2019-07-23', 'Masculino', 'Soltero', '123456782', 'byronjimenez9911@gmail.com', 'Ahuachapán', 'El Refugio', 'El Refugio calle 5', '12345102'),
+(5, 0, 'Prueba', 'Prueba', '2000-02-14', 'Masculino', 'Casado', '213232312', 'gasdf@gmail.com', 'Sadasdas', 'Sadasd', 'Easdasd', '23121232'),
+(6, 0, 'Maria', 'Gozalez', '2019-10-16', 'Femenino', 'Casado', '53886579-6', 'bjskaka@kakq.com', 'Lekdkdns', 'Jsjsjjsjs', 'Jwuwuiqiw', '5653-8888');
 
 -- --------------------------------------------------------
 
@@ -336,7 +349,8 @@ INSERT INTO `perfil_paciente` (`idperfil`, `fecha`, `peso`, `altura`, `temperatu
 (3, '2018-09-21', 10, 101, 101, 4, 0, 40, 4),
 (4, '2019-02-22', 100, 20, 40, 25, 30, 85, 4),
 (5, '2019-07-20', 500, 20, 40, 25, 30, 85, 4),
-(6, '2019-07-22', 50, 65, 1, 12, 12, 1, 5);
+(6, '2019-07-22', 50, 65, 1, 12, 12, 1, 5),
+(7, '2019-10-16', 56, 180, 56, 56, 56, 56, 6);
 
 -- --------------------------------------------------------
 
@@ -354,7 +368,8 @@ CREATE TABLE `permisos` (
 --
 
 INSERT INTO `permisos` (`idpermisos`, `valor`) VALUES
-(1, 77777777);
+(1, 77777777),
+(2, 70070000);
 
 -- --------------------------------------------------------
 
@@ -420,7 +435,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`iduser`, `user_Name`, `user_Password`, `email`, `user_type`, `idpermisos`) VALUES
-(1, 'admin', 'admin', 'rodolfo@gamil.com', 1, 1);
+(1, 'admin', 'admin', 'rodolfo@gamil.com', 1, 1),
+(2, 'byron', '1234', 'byejsjs@jajaa.jsk', 1, 2);
 
 --
 -- Índices para tablas volcadas
@@ -550,19 +566,19 @@ ALTER TABLE `citas`
 -- AUTO_INCREMENT de la tabla `consultas`
 --
 ALTER TABLE `consultas`
-  MODIFY `idconsulta` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idconsulta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `empleado`
 --
 ALTER TABLE `empleado`
-  MODIFY `idempleado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idempleado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `especialidades`
 --
 ALTER TABLE `especialidades`
-  MODIFY `idespecialidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idespecialidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `examenes`
@@ -580,7 +596,7 @@ ALTER TABLE `item_espera`
 -- AUTO_INCREMENT de la tabla `item_expediente`
 --
 ALTER TABLE `item_expediente`
-  MODIFY `iditemexp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `iditemexp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de la tabla `lista_espera`
@@ -598,7 +614,7 @@ ALTER TABLE `medicamentos`
 -- AUTO_INCREMENT de la tabla `paciente`
 --
 ALTER TABLE `paciente`
-  MODIFY `idpaciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idpaciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `pending_quotes`
@@ -610,13 +626,13 @@ ALTER TABLE `pending_quotes`
 -- AUTO_INCREMENT de la tabla `perfil_paciente`
 --
 ALTER TABLE `perfil_paciente`
-  MODIFY `idperfil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idperfil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `idpermisos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idpermisos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `tareas`
@@ -634,7 +650,7 @@ ALTER TABLE `tips`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `iduser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `iduser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
