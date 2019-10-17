@@ -143,33 +143,32 @@ class Item_exp{
     {
         // query to read single record
         $query = "SELECT
-                diagnostico, tratamiento, observaciones, receta, num_Expediente, descripcion_Exam
+                diagnostico, tratamiento, observaciones, receta, descripcion_Exam
                     FROM
                     " . $this->table_name ." 
                 WHERE
-                idconsulta = ?
+                idconsulta = ". $this->idconsulta . "
                 LIMIT
                     0,1";
     
         // prepare query statement
         $stmt = $this->conn->prepare( $query );
     
-        // bind id of product to be updated
-        $stmt->bindParam(1, $this->idconsulta);
     
-        // execute query
-        $stmt->execute();
+        if ($stmt->execute()) {
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
     
-        // get retrieved row
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-    
-        // set values to object properties
-        $this->diagnostico = $row['diagnostico'];
-        $this->tratamiento = $row['tratamiento'];
-        $this->observaciones = $row['observaciones'];
-        $this->receta = $row['receta'];
-        $this->num_Expediente = $row['num_Expediente'];
-        $this->descripcion_Exam = $row['descripcion_Exam'];
-        
+            // set values to object properties
+            $this->diagnostico = $row['diagnostico'];
+            $this->tratamiento = $row['tratamiento'];
+            $this->observaciones = $row['observaciones'];
+            $this->receta = $row['receta'];
+            $this->descripcion_Exam = $row['descripcion_Exam'];
+
+            return true;
+        }else {
+            return false;
+        }
+ 
     }
 }

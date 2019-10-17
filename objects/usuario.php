@@ -12,6 +12,8 @@ class Usuario{
     public $email;
     public $user_type;
     public $valor;
+    //Is Admin?
+    public $idespecialidad;
 
 // constructor with $db as database connection
     public function __construct($db)
@@ -240,8 +242,9 @@ class Usuario{
 
    
     function adminExist(){
-        $query = "SELECT iduser, user_Name, permisos.valor as valor
+        $query = "SELECT users.iduser, user_Name, permisos.valor as valor, empleado.idespecialidad as idespecialidad
                 FROM " . $this->table_name . " INNER JOIN permisos ON permisos.idpermisos = users.idpermisos
+                INNER JOIN empleado ON empleado.iduser = users.iduser
                 WHERE user_type = 1 AND user_Name = ? AND user_Password = ?
                 LIMIT 0,1";
         $stmt = $this->conn->prepare( $query );
@@ -257,6 +260,7 @@ class Usuario{
             $this->iduser = $row['iduser'];
             $this->valor = $row['valor'];
             $this->user_Name = $row['user_Name'];
+            $this->idespecialidad = $row['idespecialidad'];
             return true;
         }else{
             return false;

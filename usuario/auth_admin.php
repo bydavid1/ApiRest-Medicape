@@ -28,7 +28,8 @@ if($usuario->adminExist() == true)
 { 
     $arr = array("iduser" => $usuario->iduser,
                  "valor" => $usuario->valor,
-                 "user_Name" => $usuario->user_Name
+                 "user_Name" => $usuario->user_Name,
+                 "idespecialidad" => $usuario->idespecialidad,
                 );
     http_response_code(200);
 

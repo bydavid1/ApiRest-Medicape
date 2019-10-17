@@ -38,7 +38,7 @@ class Empleado{
     $query = "SELECT
                 idempleado, nombres, apellidos, fecha_Nac, sexo, estado_Civil, dui, nit, idespecialidad, telefono, celular, email, departamento, municipio, direccion, fecha_Contratacion
             FROM
-                " . $this->table_name;
+                " . $this->table_name . " WHERE idespecialidad > 0";
     // prepare query statement
     $stmt = $this->conn->prepare($query);
     // execute query
@@ -111,7 +111,17 @@ class Empleado{
     function update()
     {
 
-    // update query
+        $sql = "SELECT idespecialidad FROM especialidades WHERE nombre = '" . $this->especialidad . "'";
+        echo $sql;
+       $res = $this->conn->prepare($sql);
+
+       $res->execute();
+
+       $row = $res->fetch(PDO::FETCH_ASSOC);
+   
+       // set values to object properties
+       $this->idespecialidad = $row['idespecialidad'];
+
         $query = "UPDATE
                 " . $this->table_name . "
             SET
@@ -122,14 +132,13 @@ class Empleado{
             estado_Civil=:estado_Civil, 
             dui=:dui, 
             nit=:nit,
-            especialidad=:especialidad, 
+            idespecialidad=:idespecialidad, 
             telefono=:telefono, 
             celular=:celular, 
             email=:email, 
             departamento=:departamento, 
             municipio=:municipio, 
-            direccion=:direccion, 
-            fecha_Contratacion=:fecha_Contratacion
+            direccion=:direccion
             WHERE
                 idempleado=:idempleado";
 
@@ -144,14 +153,13 @@ class Empleado{
     $stmt->bindParam(":estado_Civil", $this->estado_Civil);
     $stmt->bindParam(":dui", $this->dui);
     $stmt->bindParam(":nit", $this->nit);
-    $stmt->bindParam(":especialidad", $this->especialidad);
+    $stmt->bindParam(":idespecialidad", $this->idespecialidad);
     $stmt->bindParam(":telefono", $this->telefono);
     $stmt->bindParam(":celular", $this->celular);
     $stmt->bindParam(":email", $this->email);
     $stmt->bindParam(":departamento", $this->departamento);
     $stmt->bindParam(":municipio", $this->municipio);
     $stmt->bindParam(":direccion", $this->direccion);
-    $stmt->bindParam(":fecha_Contratacion", $this->fecha_Contratacion);
     $stmt->bindParam(":idempleado", $this->idempleado);  
     // execute the query
     if($stmt->execute())

@@ -32,7 +32,6 @@ $paciente->estado_Civil = $data->estado_Civil;
 $paciente->dui = $data->dui;
 $paciente->telefono = $data->telefono;
 $paciente->email = $data->email;
-$paciente->num_Expediente = $data->num_Expediente;
 $paciente->departamento = $data->departamento;
 $paciente->municipio = $data->municipio;
 $paciente->direccion = $data->direccion;

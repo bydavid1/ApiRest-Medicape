@@ -87,7 +87,6 @@ class Paciente{
             fecha_Nac=:fecha_Nac, 
             sexo=:sexo, estado_Civil=:estado_Civil, 
             dui=:dui,
-            telefono=:telefono, 
             email=:email, 
             departamento=:departamento, 
             municipio=:municipio, 

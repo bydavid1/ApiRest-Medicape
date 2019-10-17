@@ -29,7 +29,26 @@ class Especialidades
 
     function create()
     {
-       //Falta crear 
+        $query = "INSERT INTO " . $this->table_name . " 
+        SET  
+        nombre=:nombre, 
+        publico=:publico";
+
+echo $query;
+// prepare query
+$stmt = $this->conn->prepare($query);
+
+// bind values
+$stmt->bindParam(":nombre", $this->nombre);
+$stmt->bindParam(":publico", $this->publico);
+
+// execute query
+if($stmt->execute())
+{
+return true;
+}
+
+return false;
     }
 
     function updatePublic()

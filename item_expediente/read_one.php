@@ -21,9 +21,8 @@ $itemExp = new Item_exp($db);
 $itemExp->idconsulta = isset($_GET['idconsulta']) ? $_GET['idconsulta'] : die();
 
 // read the details of product to be edited
-$itemExp->readOne();
 
-if($itemExp->diagnostico!=null)
+if($itemExp->readOne())
 {
     // create array
     $itemExp_arr = array(
@@ -31,7 +30,6 @@ if($itemExp->diagnostico!=null)
         "tratamiento" =>  $itemExp->tratamiento,
         "observaciones" => $itemExp->observaciones,
         "receta" => $itemExp->receta,
-        "num_Expediente" => $itemExp->num_Expediente,
         "descripcion_Exam" =>  $itemExp->descripcion_Exam  
     );
 

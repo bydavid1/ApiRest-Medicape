@@ -38,7 +38,6 @@ $empleado->email = $data->email;
 $empleado->departamento = $data->departamento;
 $empleado->municipio = $data->municipio;
 $empleado->direccion = $data->direccion;
-$empleado->fecha_Contratacion = $data->fecha_Contratacion;
 
 
 // update the empleado
