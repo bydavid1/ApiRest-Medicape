@@ -13,19 +13,20 @@ $database = new Database();
 $db = $database->getConnection();
 
 // initialize object
-$tarea = new Tarea($db);
+$tareaD = new Tarea($db);
 
 // read products will be here
 
 // query products
-$stmt = $tarea->read();
+
+$stmt = $tareaD->read();
 $num = $stmt->rowCount();
 
 // check if more than 0 record found
 if($num>0){
 
     // products array
-    $tarea_arr=array();
+
     $tarea_arr =array();
 
     // retrieve our table contents
@@ -42,7 +43,8 @@ if($num>0){
             "tarea" => $tarea,
             "lugar" => $lugar,
             "hora" => $hora,
-            "fecha" => $fecha,
+            "Mes" => $Mes,
+            "Dia"=> $Dia,
             "descripcion" => $descripcion
         
         );

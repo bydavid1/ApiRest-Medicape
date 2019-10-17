@@ -137,9 +137,28 @@ class Horario{
         $stmt->bindParam(1, $this->Idhorario);
 
         $stmt->execute();
-    
-        return $stmt;
 
+        return $stmt;
+        
+    }
+
+    function readById()
+    {
+
+        $query = "SELECT
+            Idhorario, tiempo_cita, numero_cita, hora_inicio, DATE_FORMAT(hora_final, \"%H:%i\") hora_final, idDoc
+                FROM
+                    " . $this->table_name ." 
+                WHERE
+                idDoc = ?";
+
+        $stmt = $this->conn->prepare( $query );
+
+        $stmt->bindParam(1, $this->idDoc);
+
+        $stmt->execute();
+        
+        return $stmt;
         
     }
 

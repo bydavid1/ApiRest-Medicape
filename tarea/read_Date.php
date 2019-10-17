@@ -61,6 +61,5 @@ else{
     // set response code - 404 Not found
     
     http_response_code(404);
-    // tell the user no products found
-    
+    echo json_encode("No hay Tareas");
 }

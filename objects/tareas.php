@@ -11,6 +11,8 @@ class Tarea
     public $lugar;
     public $hora;
     public $fecha;
+    public $Dia;
+    public $Mes;
     public $descripcion;
 
 
@@ -25,12 +27,11 @@ class Tarea
 // read products
     function read()
     {
-    // select all query
-    $query = "SELECT
-                *
+
+        $query= "SELECT ELT(MONTH(fecha), \"Enero\", \"Febrero\", \"Marzo\", \"Abril\", \"Mayo\", \"Junio\", \"Julio\", \"Agosto\", \"Septiembre\", \"Octubre\", \"Noviembre\", \"Diciembre\") Mes, DAY(fecha) Dia, idtarea, tarea, lugar, hora, descripcion    
             FROM
-                " . $this->table_name;
-    // prepare query statement
+                " .$this->table_name;
+
     $stmt = $this->conn->prepare($query);
     // execute query
     $stmt->execute();
@@ -133,7 +134,7 @@ class Tarea
 
         // query to read single record
         $query = "SELECT
-                    *
+              *
                 FROM
                     " . $this->table_name ." 
                 WHERE
@@ -154,14 +155,9 @@ class Tarea
 //readDate
     function readDate()
     {
-    // select all query
-
-    
-    $query = "SELECT
-                *
-            FROM    " . $this->table_name ."
-            WHERE
-            fecha = CURRENT_DATE ";
+    $query = "SELECT idtarea, tarea, lugar, DATE_FORMAT(hora, \"%H:%i\") hora, fecha, descripcion 
+    FROM  " . $this->table_name ."
+    WHERE fecha = CURRENT_DATE";
     // prepare query statement
     $stmt = $this->conn->prepare($query);
     // execute query
