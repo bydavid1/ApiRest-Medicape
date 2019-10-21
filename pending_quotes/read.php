@@ -16,7 +16,7 @@ $db = $database->getConnection();
 $pending = new pending_quotes($db);
 
 $pending->idempleado = isset($_GET['idempleado']) ? $_GET['idempleado'] : die();
-// read the details of product to be edited
+
 if($stmt = $pending->read()){
     $pending_arr=array();
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
@@ -29,8 +29,7 @@ if($stmt = $pending->read()){
             "hora" => $hora,
             "idpaciente" => $idpaciente,
             "nombre" => $nombre,
-            "apellido" => $apellido,
-            "Tipo" => $tipo
+            "apellido" => $apellido
         );
 
         array_push($pending_arr, $pending_item);

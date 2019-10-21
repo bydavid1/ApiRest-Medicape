@@ -25,7 +25,7 @@ class pending_quotes
     {
     // select all query
     $query = "SELECT
-              idpending, fecha, hora, paciente.nombre as nombre, paciente.apellido as apellido, tipo
+              idpending, fecha, hora, paciente.nombres as nombre, paciente.apellidos as apellido, pending_quotes.idpaciente
             FROM
                 " . $this->table_name . " INNER JOIN paciente ON paciente.idpaciente = pending_quotes.idpaciente WHERE idempleado=" . $this->idempleado;
     // prepare query statement
