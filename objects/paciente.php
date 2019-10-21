@@ -151,7 +151,7 @@ class Paciente{
                 FROM
                     " . $this->table_name ." 
                 WHERE
-                    idpaciente = ?
+                    iduser = ?
                 LIMIT
                     0,1";
     

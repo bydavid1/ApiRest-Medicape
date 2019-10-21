@@ -22,6 +22,7 @@ $data = json_decode(file_get_contents("php://input"));
     if(
     !empty($data->fecha) &&
     !empty($data->hora) &&
+    !empty($data->tipo) &&
     !empty($data->idempleado) &&
     !empty($data->idpaciente)
     )
@@ -29,6 +30,7 @@ $data = json_decode(file_get_contents("php://input"));
 
     $pending->fecha = $data->fecha;
     $pending->hora = $data->hora;
+    $pending->tipo = $data->tipo;
     $pending->idempleado = $data->idempleado;
     $pending->idpaciente = $data->idpaciente;
 
