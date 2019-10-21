@@ -29,7 +29,8 @@ if($stmt = $pending->read()){
             "hora" => $hora,
             "idpaciente" => $idpaciente,
             "nombre" => $nombre,
-            "apellido" => $apellido
+            "apellido" => $apellido,
+            "Tipo" => $tipo
         );
 
         array_push($pending_arr, $pending_item);
