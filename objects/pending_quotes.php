@@ -9,10 +9,10 @@ class pending_quotes
     public $idpending;
     public $fecha;
     public $hora;
-    public $tipo;
-    public $idpaciente;
     public $nombre;
     public $apellido;
+    public $idpaciente;
+    public $idempleado;
 
 // constructor with $db as database connection
     public function __construct($db)
@@ -24,9 +24,9 @@ class pending_quotes
     {
     // select all query
     $query = "SELECT
-              idpending, fecha, hora, tipo, idpaciente, nombre, apellido
+              idpending, fecha, hora, paciente.nombre, paciente.apellido
             FROM
-                " . $this->table_name;
+                " . $this->table_name . " INNER JOIN paciente ON paciente.idpaciente = pending_quotes.idpaciente WHERE idempleado=" . $this->idempleado;
     // prepare query statement
     $stmt = $this->conn->prepare($query);
     // execute query
@@ -41,9 +41,7 @@ class pending_quotes
             SET 
             fecha=:fecha,
             hora=:hora,
-            tipo=:tipo,
-            nombre=:nombre,
-            apellido=:apellido,
+            idempleado=:idempleado,
             idpaciente=:idpaciente";
       
       // prepare query
@@ -52,9 +50,7 @@ class pending_quotes
       // bind values
       $stmt->bindParam(":fecha", $this->fecha);
       $stmt->bindParam(":hora", $this->hora);
-      $stmt->bindParam(":tipo", $this->tipo);
-      $stmt->bindParam(":nombre", $this->nombre);
-      $stmt->bindParam(":apellido", $this->apellido);
+      $stmt->bindParam(":apellido", $this->idempleado);
       $stmt->bindParam(":idpaciente", $this->idpaciente);
       
       if($stmt->execute())
@@ -69,7 +65,7 @@ class pending_quotes
     {
     // select all query
     $query = "SELECT
-                fecha, hora, tipo
+                fecha, hora
             FROM
                 " . $this->table_name ." WHERE idpaciente = ?";
     // prepare query statement

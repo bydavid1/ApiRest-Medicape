@@ -15,6 +15,7 @@ $db = $database->getConnection();
 
 $pending = new pending_quotes($db);
 
+$pending->idempleado = isset($_GET['idempleado']) ? $_GET['idempleado'] : die();
 // read the details of product to be edited
 if($stmt = $pending->read()){
     $pending_arr=array();
@@ -26,7 +27,6 @@ if($stmt = $pending->read()){
             "idpending" => $idpending,
             "fecha" => $fecha,
             "hora" => $hora,
-            "tipo" => $tipo,
             "idpaciente" => $idpaciente,
             "nombre" => $nombre,
             "apellido" => $apellido

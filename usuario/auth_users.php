@@ -16,8 +16,6 @@ $database = new Database();
 $db = $database->getConnection();
 
 $usuario = new Usuario($db);
-$validate = new Usuario($db);
-
 
 // get posted data
 $data = json_decode(file_get_contents("php://input"));
@@ -27,11 +25,10 @@ $data = json_decode(file_get_contents("php://input"));
 // set product property values
 $usuario->user_Name = $data->user_Name;
 $usuario->user_Password = $data->user_Password;
-$usuario->userExists();
 
-if($usuario->reference!=null)
+if($usuario->userExists())
 { 
-    $arr = $usuario->reference;
+    $arr = $usuario->iduser;
     http_response_code(200);
 
     echo json_encode($arr);

@@ -86,4 +86,15 @@ return false;
         }
         return false;
     }
+
+    function CustomRead()
+    {
+    $query = "SELECT
+                idespecialidad, nombre, publico
+            FROM
+                " . $this->table_name . " WHERE publico = 1";
+    $stmt = $this->conn->prepare($query);
+    $stmt->execute();
+    return $stmt;
+    }
 }

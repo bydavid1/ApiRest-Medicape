@@ -312,4 +312,25 @@ class Empleado{
 
     return $stmt;
     }
+
+
+    function getDocs($keywords)
+    {
+    $query = "SELECT
+            idempleado, nombres, apellidos
+            FROM
+                " . $this->table_name . " 
+            WHERE
+            idespecialidad =". $keywords;
+
+    // prepare query statement
+    $stmt = $this->conn->prepare($query);
+
+    $keywords=htmlspecialchars(strip_tags($keywords));
+
+    // execute query
+    $stmt->execute();
+    
+    return $stmt;
+    }
 }

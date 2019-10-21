@@ -226,14 +226,14 @@ class Usuario{
         $stmt->bindParam(2, $this->user_Password);
 
         $stmt->execute();
-    
 
         $num = $stmt->rowCount();
     
         if($num>0){
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
-    
-      //FALTA
+           
+            $this->iduser = $row['iduser'];
+          return true;
 
         }else{
             return false;
